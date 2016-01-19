@@ -1,5 +1,7 @@
+require './lib/bike'
+
 class DockingStation
   def release_bike
-    # Do something
+    Bike.new
   end
 end
