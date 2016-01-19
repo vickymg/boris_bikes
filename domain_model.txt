@@ -1,0 +1,17 @@
+Nouns
+
+1. person
+2. bike
+3. docking station
+
+Verbs
+
+1. use
+2. release
+3. working
+
+
+type of error = NameError: uninitialized constant
+file path = /Users/jono442244/.rvm/rubies/ruby-2.2.1/bin/irb:11:in `<main>'
+line number = 11
+
