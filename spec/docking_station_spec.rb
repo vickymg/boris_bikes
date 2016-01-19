@@ -24,8 +24,13 @@ describe DockingStation do
       end
     end
 
-
-    # instances of DockingStation should respond to release_bike method
+    describe '#dock' do
+      it "raises an error when the docking station is at capacity" do
+        subject.dock(Bike.new)
+        expect { subject.dock Bike.new }.to raise_error("Docking station full")
+      end
+    end
+    #instances of DockingStation should respond to release_bike method
     it { should respond_to :release_bike }
 
 end
