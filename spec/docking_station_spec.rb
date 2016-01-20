@@ -13,6 +13,13 @@ describe DockingStation do
     expect {subject.release_bike}.to raise_error("There are no bikes here!")
   end
 
+  it "doesn't dock a bike if over capacity" do
+  	test_bike = Bike.new
+  	subject.dock(test_bike)
+  	test_bike_2 = Bike.new
+  	expect {subject.dock(test_bike_2)}.to raise_error("No space to dock here.")
+  end
+
   it {is_expected.to respond_to(:dock).with(1).argument}
   it 'docks a bike' do
     test_bike = Bike.new
