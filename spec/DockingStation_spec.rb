@@ -1,7 +1,7 @@
 require 'DockingStation'
 
 describe DockingStation do
-#	subject(:DockingStation) {described_class.new}
+	subject(:DockingStation) {described_class.new}
 
   	it { is_expected.to respond_to :release_bike }
 
@@ -23,15 +23,14 @@ describe DockingStation do
     	it 'returns docked bikes' do
     		bike = Bike.new
     		subject.dock(bike)
-    		expect(subject.bike).to eq bike
+    		expect(subject.bikes).to include 
     	end
     end
 
     describe '#dock' do
       it 'expects dock to raise an error' do
-        bike = Bike.new
-        subject.dock(bike)
-        expect{subject.dock(bike)}.to raise_error("The dock is full")
+      20.times { subject.dock Bike.new }
+        expect{subject.dock(Bike.new)}.to raise_error("The dock is full")
       end
     end
 
