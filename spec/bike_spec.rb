@@ -1,5 +1,17 @@
 require 'bike'
 
 describe Bike do
-  it { is_expected.to respond_to :working?}
+
+  describe '#initialize' do
+    it "has a default state of working" do
+      expect((Bike.new).working).to be_truthy
+    end
+  end
+
+  describe '#broken' do
+    it "can be broken" do
+      expect((Bike.new).broken).to be false
+    end
+  end
+
 end

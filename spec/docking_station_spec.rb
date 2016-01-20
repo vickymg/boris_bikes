@@ -42,4 +42,5 @@ describe DockingStation do
     expect(DockingStation.new(3).capacity).to eq 3
   end
 
+
 end
