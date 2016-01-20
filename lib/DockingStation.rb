@@ -4,19 +4,31 @@ class DockingStation
 
 	attr_accessor :bikes
 
+	DEFAULT_CAPACITY=20
+
 	def initialize
 	   @bikes = []
 	end
 
 	def release_bike
-		raise "There are no bikes in the dock" if @bikes.length == 0
+		raise "There are no bikes in the dock" if empty?
 		@bikes.pop
 	end
 
 	def dock(bike)
-		raise "The dock is full" if @bikes.length == 20
+		raise "The dock is full" if full?
 		@bikes << bike
 		#@bikes_in_dock += 1
+	end
+
+	private
+
+	def full?
+		@bikes.length >= DEFAULT_CAPACITY
+	end
+
+	def empty?
+		@bikes.empty?
 	end
 
 	# def view_dock
