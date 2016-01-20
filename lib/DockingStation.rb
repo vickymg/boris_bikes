@@ -1,22 +1,22 @@
 require_relative 'Bike.rb'
 
-class DockingStation 
+class DockingStation
 
-	attr_accessor :bike
+	attr_accessor :bike, :bikes_in_dock
 
-	def initialize(number_of_bikes)
-	   @bikes_in_dock = 1
-	end
+	#def initialize(bikes_in_dock = 0)
+	  # self.bikes_in_dock = bikes_in_dock
+	#end
 
-	def release_bike 
-		raise "There are no bikes in the dock" if @bikes_in_dock == 0
-		@bikes_in_dock -= 1 
-		Bike.new
+	def release_bike
+		raise "There are no bikes in the dock" unless @bike
+		#@bikes_in_dock -= 1
+		@bike
 	end
 
 	def dock(bike)
 		@bike = bike
-		@bikes_in_dock += 1 
+		#@bikes_in_dock += 1
 	end
 
 	# def view_dock
@@ -49,4 +49,3 @@ end
 # puts
 
 # puts station.view_dock
-
