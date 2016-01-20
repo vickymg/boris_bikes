@@ -14,22 +14,20 @@ describe DockingStation do
   end
 
   it "doesn't dock a bike if over capacity" do
-  	test_bike = Bike.new
-  	subject.dock(test_bike)
-  	test_bike_2 = Bike.new
-  	expect {subject.dock(test_bike_2)}.to raise_error("No space to dock here.")
+     20.times{subject.dock(Bike.new)}
+     expect{subject.dock(Bike.new)}.to raise_error("No space to dock here.")
   end
 
   it {is_expected.to respond_to(:dock).with(1).argument}
   it 'docks a bike' do
     test_bike = Bike.new
-    expect(subject.dock(test_bike)).to eq test_bike
+    expect(subject.dock(test_bike).last).to eq test_bike
   end
 
-  it {is_expected.to respond_to :bike}
+  it {is_expected.to respond_to :bikes}
   it 'returns docked bike' do
     test_bike = Bike.new
     subject.dock(test_bike)
-    expect(subject.bike).to eq test_bike
+    expect(subject.bikes.last).to eq test_bike
   end
 end
