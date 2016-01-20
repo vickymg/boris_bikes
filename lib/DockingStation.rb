@@ -2,21 +2,20 @@ require_relative 'Bike.rb'
 
 class DockingStation
 
-	attr_accessor :bike, :bikes_in_dock
+	attr_accessor :bikes
 
-	#def initialize(bikes_in_dock = 0)
-	  # self.bikes_in_dock = bikes_in_dock
-	#end
+	def initialize
+	   @bikes = []
+	end
 
 	def release_bike
-		raise "There are no bikes in the dock" unless @bike
-		#@bikes_in_dock -= 1
-		@bike
+		raise "There are no bikes in the dock" if @bikes.length == 0
+		@bikes.pop
 	end
 
 	def dock(bike)
-		raise "The dock is full" if @bike
-		@bike = bike
+		raise "The dock is full" if @bikes.length == 20
+		@bikes << bike
 		#@bikes_in_dock += 1
 	end
 
