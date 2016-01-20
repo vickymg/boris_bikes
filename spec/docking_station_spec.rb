@@ -13,11 +13,12 @@ describe DockingStation do
 
   it { is_expected.to respond_to(:dock).with(1).argument }
 
-  it { is_expected.to respond_to :bike }
+  it { is_expected.to respond_to :bikes }
 
   it 'checks if the bike has been docked' do
     bike = Bike.new
-    expect(subject.dock(bike)).to eq bike
+    bikes = []
+    expect(subject.dock(bike)).to eq [bike]
   end
 
   describe '#release_bike' do
