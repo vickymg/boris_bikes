@@ -15,7 +15,8 @@ class Van
   end
 
   def deliver_bikes(garage)
-
+    garage.receive_bikes(@bikes)
+    @bikes = []
   end
 
 end

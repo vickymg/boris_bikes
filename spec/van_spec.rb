@@ -21,13 +21,18 @@ describe Van do
     let(:broken_bike1) { double(:bike, :working => false) }
     let(:broken_bike2) { double(:bike, :working => false) }
     let(:station) {double(:docking_station, :bikes => [broken_bike1, broken_bike2])}
-    let(:garage) { double :garage }
+    let(:garage) { double(:garage) }
+
 
     it 'delivers broken bikes to a garage' do
+      allow(garage).to receive(:receive_bikes)
       subject.collect_bikes(station)
       subject.deliver_bikes(garage)
       expect(subject.bikes).to be_empty
     end
+
+
+
   end
 
 end
