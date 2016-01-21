@@ -37,9 +37,8 @@ describe DockingStation do
     end
 
     it 'will release a working bike and not a broken bike' do
-      bike_two = double(:bike)
+      bike_two = double(:bike, :working => false)
       allow(bike).to receive(:working).and_return(true)
-      allow(bike_two).to receive(:working).and_return(false)
 
       subject.dock(bike_two)
       subject.dock(bike)
