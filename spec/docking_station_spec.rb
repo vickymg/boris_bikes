@@ -22,7 +22,7 @@ describe DockingStation do
       allow(bike).to receive(:working).and_return(true)
 
       subject.dock(bike)
-      expect(subject.release_bike.working).to be_truthy
+      expect(subject.release_bike).to be bike
     end
 
     it 'raises an error if there are no bikes' do
