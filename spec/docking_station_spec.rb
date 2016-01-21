@@ -14,8 +14,19 @@ describe DockingStation do
   end
 
   it "doesn't dock a bike if over capacity" do
-     20.times{subject.dock(Bike.new)}
+     subject.capacity.times{subject.dock(Bike.new)}
      expect{subject.dock(Bike.new)}.to raise_error("No space to dock here.")
+  end
+
+  it "docking station defaults to 20 when no number is set" do
+    station = DockingStation.new
+    expect(station.capacity).to eq 20
+  end
+
+  it "allows user to set amount of bikes in new docking station" do
+    station = DockingStation.new(3)
+    expect(station.capacity).to eq 3
+
   end
 
   it {is_expected.to respond_to(:dock).with(1).argument}
