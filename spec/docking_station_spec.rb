@@ -17,21 +17,47 @@ describe DockingStation do
 
   it 'checks if the bike has been docked' do
     bike = Bike.new
-    bikes = []
-    expect(subject.dock(bike)).to eq [bike]
+    expect(subject.dock(bike)).to include bike
   end
 
   describe '#release_bike' do
+
+    let(:bike) { Bike.new }
+
     it 'raises an error if there are no bikes' do
       expect{subject.release_bike}.to raise_error("No bikes")
     end
+
+    it 'will not release a broken bike' do
+      bike.broken
+      subject.dock(bike)
+      expect{subject.release_bike}.to raise_error("bike is broken")
+    end
+
+    it 'will release a working bike and not a broken bike' do
+      bike_two = Bike.new
+      bike_two.broken
+      subject.dock(bike_two)
+      subject.dock(bike)
+      expect(subject.release_bike).to eq bike
+    end
+
   end
 
   describe '#dock' do
+
+    let(:bike) { Bike.new }
+
     it 'raises an error if at capacity' do
       subject.capacity.times { subject.dock Bike.new }
-      expect{subject.dock(Bike.new)}.to raise_error("Dock full")
+      expect{subject.dock(bike)}.to raise_error("Dock full")
     end
+
+    it 'docks broken bikes' do
+      bike.broken
+      expect(subject.dock(bike)).to include bike
+    end
+
   end
 
   it 'has a default capacity' do
@@ -41,6 +67,8 @@ describe DockingStation do
   it 'checks if capacity can be set' do
     expect(DockingStation.new(3).capacity).to eq 3
   end
+
+
 
 
 end
