@@ -10,7 +10,7 @@ describe Bike do
 
   describe '#broken' do
     it "can be broken" do
-      expect((Bike.new).broken).to be false
+      expect(((Bike.new).broken).working).to be_falsey
     end
   end
 

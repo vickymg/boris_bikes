@@ -11,7 +11,6 @@ class DockingStation
     @capacity = capacity
   end
 
-
   def release_bike
     raise "No bikes" if empty?
     for i in 0...@bikes.length do
