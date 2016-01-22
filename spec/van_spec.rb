@@ -9,7 +9,7 @@ describe Van do
     let(:working_bike) {double(:bike, :working => true)}
     let(:station) {double(:docking_station, :bikes => [broken_bike, working_bike])}
 
-    it 'allows vans to collect bikes' do
+    it 'allows vans to collect broken bikes' do
       subject.collect_bikes(station)
       expect(subject.bikes).to eq [broken_bike]
     end
@@ -31,8 +31,19 @@ describe Van do
       expect(subject.bikes).to be_empty
     end
 
+  end
 
+  describe '#collect_working_bikes' do
+    it {is_expected.to respond_to(:collect_working_bikes).with(1).argument}
 
+    let(:bike1) { double(:bike, :working => true) }
+    let(:bike2) { double(:bike, :working => true) }
+    let(:garage) { double(:garage, :bikes => [bike1, bike2]) }
+
+    it 'collects working bikes' do
+      subject.collect_working_bikes(garage)
+      expect(subject.bikes).to eq [bike1, bike2]
+    end
   end
 
 end
