@@ -46,4 +46,18 @@ describe Van do
     end
   end
 
+  describe '#deliver_working_bikes_to_dock' do
+    it {is_expected.to respond_to(:deliver_working_bikes_to_dock).with(1).argument}
+
+    let(:broken_bike1) { double(:bike, :working => false) }
+    let(:station) {double(:docking_station, :bikes => [broken_bike1])}
+    let(:garage) { double(:garage) }
+
+    it 'will not return broken bikes to a dock' do
+      subject.collect_bikes(station)
+      expect(subject.deliver_working_bikes_to_dock(garage)).to raise_error("You can't return broken bikes to a dock")
+    end
+
+  end
+
 end
