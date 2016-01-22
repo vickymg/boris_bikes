@@ -9,7 +9,7 @@ class Van
   end
 
   def collect_bikes(station)
-    @bikes = station.bikes.select do |bike|
+    @bikes = station.bikes.select! do |bike|
       !bike.working
     end
   end
@@ -17,6 +17,12 @@ class Van
   def deliver_bikes(garage)
     garage.receive_bikes(@bikes)
     @bikes = []
+  end
+
+  def collect_working_bikes(garage)
+    @bikes = garage.bikes.select! do |bike|
+      bike.working
+    end
   end
 
 end
