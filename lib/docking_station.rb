@@ -19,9 +19,21 @@ class DockingStation
     raise "Bike is broken"
   end
 
+  def release_broken_bikes
+    broken_bikes = []
+    @bikes.each do |bike|
+        broken_bikes << @bikes.delete(bike) if !bike.working
+    end
+    broken_bikes
+  end
+
   def dock(bike)
     raise "Dock full" if full?
     @bikes << bike
+  end
+
+  def receive_working_bikes(bikes)
+    @bikes << bikes
   end
 
   private

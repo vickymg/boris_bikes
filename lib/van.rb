@@ -9,9 +9,7 @@ class Van
   end
 
   def collect_bikes(station)
-    @bikes = station.bikes.select! do |bike|
-      !bike.working
-    end
+    @bikes = station.release_broken_bikes
   end
 
   def deliver_bikes(garage)
@@ -27,7 +25,9 @@ class Van
   end
 
   def deliver_working_bikes_to_dock(station)
-    # raise "You can't return broken bikes to a dock" if @bikes.
+    # raise "You can't return broken bikes to a dock" if @bikes.select { |bike| !bike.working }
+    station.receive_working_bikes(@bikes)
+    @bikes = []
   end
 
 end
