@@ -3,11 +3,10 @@ require 'docking_station'
 describe DockingStation do
 
   it { is_expected.to respond_to :release_bike }
-  it { is_expected.to respond_to(:bike) }
+  it { is_expected.to respond_to :bikes }
 
 
   describe '#release_bike' do
-
     it 'releases a bike' do
       bike = Bike.new
       subject.dock(bike)
@@ -31,11 +30,11 @@ describe DockingStation do
     it 'docks a bike' do
       bike = Bike.new
       subject.dock(bike)
-      expect(subject.bike).to eq(bike)
+      expect(subject.bikes).to include(bike)
     end
 
-    it 'raises an error if no bikes available' do
-      subject.dock(Bike.new)
+    it 'raises an error if docking station full' do
+      20.times { subject.dock(Bike.new) }
       expect{subject.dock(Bike.new)}.to raise_error("Docking station full!")
     end
   end
