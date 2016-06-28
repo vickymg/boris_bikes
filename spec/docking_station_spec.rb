@@ -1,37 +1,57 @@
 require 'docking_station'
-require 'bike'
 
 describe DockingStation do
 
-    # expects instances of DockingStation to respond to a method dock,
-    # with one argument passed in
-    it { is_expected.to respond_to(:dock).with(1).argument }
+  it { is_expected.to respond_to :release_bike }
+  it { is_expected.to respond_to :bikes }
 
+  it 'has a default capacity of 20' do
+    expect(subject.capacity).to eq(DockingStation::DEFAULT_CAPACITY)
+  end
 
-    # Call 'dock' method on instances of DockingStation, and
-    # pass argument as variable 'bike' (creating new instance of Bike)
-    # expect instance variable bike to equal to argument bike
+  it 'has a default capacity that can be changed when needed' do
+    station = DockingStation.new(capacity = 15)
+    expect(station.capacity).to eq(15)
+  end
+
   describe '#release_bike' do
-      # it 'releases a bike' do
-      #   bike = Bike.new
-      #   subject.dock(bike)
-      #   expect(subject.bike).to eq bike
-      # end
-
-    # expect an error to be raised when release_bike method is called on
-    # instances of DockingStation
-      it "raises an error when there are no bikes available" do
-        expect {subject.release_bike}.to raise_error("No bikes available")
-      end
+    it 'releases a bike' do
+      bike = Bike.new
+      subject.dock(bike)
+      expect(subject.release_bike).to eq(bike)
     end
 
-    describe '#dock' do
-      it "raises an error when the docking station is at capacity" do
-        20.times {subject.dock Bike.new}
-        expect { subject.dock Bike.new }.to raise_error("Docking station full")
-      end
+    it 'releases a working bike' do
+      bike = Bike.new
+      subject.dock(bike)
+      bike = subject.release_bike
+      expect(bike).not_to be_broken
     end
-    #instances of DockingStation should respond to release_bike method
-    it { should respond_to :release_bike }
 
+    it 'raises an error if no bikes available' do
+      message = 'No bikes available at this station!'
+      expect{subject.release_bike}.to raise_error(message)
+    end
+
+    it 'doesn\'t release a bike that\'s broken' do
+      bike = Bike.new
+      bike.report_broken
+      subject.dock(bike)
+      message = 'Sorry, this bike is broken!'
+      expect{subject.release_bike}.to raise_error(message)
+    end
+  end
+
+  describe '#dock' do
+    it 'docks a bike' do
+      bike = Bike.new
+      subject.dock(bike)
+      expect(subject.bikes).to include(bike)
+    end
+
+    it 'raises an error if docking station full' do
+      subject.capacity.times { subject.dock(Bike.new) }
+      expect{subject.dock(Bike.new)}.to raise_error("Docking station full!")
+    end
+  end
 end
