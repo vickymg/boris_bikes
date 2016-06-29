@@ -9,9 +9,9 @@ class Van
     @capacity = capacity
   end
 
-  def load(bike)
+  def load(station)
     raise "Sorry, van is full!" if full?
-    @bikes << bike
+    @bikes << station.release_broken_bikes
   end
 
   def unload
