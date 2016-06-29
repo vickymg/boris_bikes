@@ -12,13 +12,27 @@ describe Van do
     expect(subject.capacity).to eq(Van::CAPACITY)
   end
 
-  it 'loads a bike' do
-    subject.load(bike)
-    expect(subject.bikes).to include(bike)
+  describe '#load' do
+    it 'loads a bike' do
+      subject.load(bike)
+      expect(subject.bikes).to include(bike)
+    end
+
+    it 'raises an error if van is full' do
+      subject.capacity.times { subject.load(bike) }
+      expect{ subject.load(bike) }.to raise_error("Sorry, van is full!")
+    end
   end
 
-  it 'unloads bikes' do
-    subject.load(bike)
-    expect(subject.unload).to eq(bike)
+  describe '#unload' do
+    it 'unloads bikes' do
+      subject.load(bike)
+      expect(subject.unload).to eq(bike)
+    end
+
+    it 'raises an error if there are no bikes to unload' do
+      expect{ subject.unload }.to raise_error("No bikes to unload!")
+    end
   end
+
 end
