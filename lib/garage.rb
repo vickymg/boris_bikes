@@ -10,7 +10,23 @@ class Garage
   end
 
   def receive(van)
+    raise 'Garage is full!' if full?
     @bikes << van.unload
+  end
+
+  def fix_bikes
+    @bikes.each { |bike| bike.fix }
+    @bikes
+  end
+
+  private
+
+  def full?
+    @bikes.length >= @capacity ? true : false
+  end
+
+  def empty?
+    @bikes.empty?
   end
 
 end
