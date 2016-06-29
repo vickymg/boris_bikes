@@ -20,10 +20,12 @@ class Van
   end
 
   def collect(garage)
+    raise "Sorry, van is full!" if full?
     @bikes << garage.fix_and_dispatch_bikes
   end
 
   def deliver_working_bikes
+    raise "No bikes to deliver!" if empty?
     for i in 0...@bikes.length do
       return @bikes.shift if !@bikes[i].broken?
     end

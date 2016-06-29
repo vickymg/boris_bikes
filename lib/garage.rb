@@ -15,6 +15,7 @@ class Garage
   end
 
   def fix_and_dispatch_bikes
+    raise 'No bikes to dispatch!' if empty?
     @bikes.each { |bike| bike.fix }
     @bikes
   end

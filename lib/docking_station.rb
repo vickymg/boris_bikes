@@ -32,6 +32,7 @@ class DockingStation
   end
 
   def receive_fixed_bikes(van)
+    raise "Docking station full!" if full?
     @bikes << van.deliver_working_bikes
   end
 
