@@ -9,12 +9,12 @@ class Van
     @capacity = capacity
   end
 
-  def load_bikes
-
+  def load(bike)
+    @bikes << bike
   end
 
-  def unload_bikes
-
+  def unload
+    @bikes.pop
   end
 
 end

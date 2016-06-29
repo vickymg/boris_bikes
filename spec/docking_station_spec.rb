@@ -4,8 +4,6 @@ describe DockingStation do
 
   let(:bike) { double :bike}
 
-  it { is_expected.to respond_to :bikes }
-
   it 'has a default capacity of 20' do
     expect(subject.capacity).to eq(DockingStation::DEFAULT_CAPACITY)
   end
