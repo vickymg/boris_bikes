@@ -11,6 +11,11 @@ class DockingStation
     @capacity = capacity
   end
 
+  def dock(bike)
+    raise "Docking station full!" if full?
+    @bikes << bike
+  end
+
   def release_bike
     raise 'No bikes available at this station!' if empty?
     for i in 0...@bikes.length do
@@ -19,9 +24,10 @@ class DockingStation
     raise 'Sorry, this bike is broken!'
   end
 
-  def dock(bike)
-    raise "Docking station full!" if full?
-    @bikes << bike
+  def release_broken_bikes
+    for i in 0...@bikes.length do
+      return @bikes.shift if @bikes[i].broken?
+    end
   end
 
   private

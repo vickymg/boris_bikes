@@ -44,4 +44,13 @@ describe DockingStation do
       expect{subject.dock(bike)}.to raise_error("Docking station full!")
     end
   end
+
+  describe '#release_broken_bikes' do
+    it 'releases broken bikes' do
+      allow(bike).to receive(:broken?).and_return(true)
+      subject.dock(bike)
+      expect(subject.release_broken_bikes).to eq(bike)
+    end
+
+  end
 end
