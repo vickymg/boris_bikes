@@ -4,6 +4,7 @@ describe Van do
 
   let(:bike) { double :bike }
   let(:station) { double :docking_station }
+  let(:garage) { double :garage }
 
   it 'has a maximum capacity' do
     expect(subject.capacity).to eq(Van::CAPACITY)
@@ -32,6 +33,14 @@ describe Van do
 
     it 'raises an error if there are no bikes to unload' do
       expect{ subject.unload }.to raise_error("No bikes to unload!")
+    end
+  end
+
+  describe '#collect' do
+    it 'collects working bikes from the garage' do
+      allow(garage).to receive(:fix_and_dispatch_bikes).and_return(bike)
+      subject.collect(garage)
+      expect(subject.bikes).to include(bike)
     end
   end
 

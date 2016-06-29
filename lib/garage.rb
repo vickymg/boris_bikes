@@ -14,7 +14,7 @@ class Garage
     @bikes << van.unload
   end
 
-  def fix_bikes
+  def fix_and_dispatch_bikes
     @bikes.each { |bike| bike.fix }
     @bikes
   end

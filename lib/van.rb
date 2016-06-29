@@ -19,6 +19,10 @@ class Van
     @bikes.pop
   end
 
+  def collect(garage)
+    @bikes << garage.fix_and_dispatch_bikes
+  end
+
   private
 
   def full?

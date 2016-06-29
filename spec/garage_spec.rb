@@ -31,7 +31,7 @@ describe Garage do
       allow(van).to receive(:unload).and_return(bike)
       subject.receive(van)
       allow(bike).to receive(:fix).and_return(false)
-      expect(subject.fix_bikes).to include(bike)
+      expect(subject.fix_and_dispatch_bikes).to include(bike)
     end
   end
 
