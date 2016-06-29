@@ -3,6 +3,7 @@ require 'docking_station'
 describe DockingStation do
 
   let(:bike) { double :bike}
+  let(:van) { double :van }
 
   it 'has a default capacity of 20' do
     expect(subject.capacity).to eq(DockingStation::DEFAULT_CAPACITY)
@@ -55,6 +56,14 @@ describe DockingStation do
     it 'raises an error if no bikes are broken' do
       message = "No broken bikes to collect!"
       expect{subject.release_broken_bikes}.to raise_error(message)
+    end
+  end
+
+  describe '#receive_fixed_bikes' do
+    it 'receives fixed bikes from the van' do
+      allow(bike).to receive(:broken?).and_return(false)
+      allow(van).to receive(:deliver_working_bikes).and_return(bike)
+      expect(subject.receive_fixed_bikes(van)).to include(bike)
     end
   end
 end

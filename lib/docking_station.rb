@@ -31,6 +31,10 @@ class DockingStation
     end
   end
 
+  def receive_fixed_bikes(van)
+    @bikes << van.deliver_working_bikes
+  end
+
   private
 
   def full?

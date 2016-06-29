@@ -23,6 +23,12 @@ class Van
     @bikes << garage.fix_and_dispatch_bikes
   end
 
+  def deliver_working_bikes
+    for i in 0...@bikes.length do
+      return @bikes.shift if !@bikes[i].broken?
+    end
+  end
+
   private
 
   def full?

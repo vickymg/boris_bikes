@@ -44,4 +44,13 @@ describe Van do
     end
   end
 
+  describe '#deliver_working_bikes' do
+    it 'delivers working bikes to the docking station' do
+      allow(garage).to receive(:fix_and_dispatch_bikes).and_return(bike)
+      allow(bike).to receive(:broken?).and_return(false)
+      subject.collect(garage)
+      expect(subject.deliver_working_bikes).to eq(bike)
+    end
+  end
+
 end
