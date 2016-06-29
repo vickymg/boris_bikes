@@ -8,7 +8,7 @@ describe Van do
 
   it { is_expected.to respond_to :unload }
 
-  it 'has a capacity of 5' do
+  it 'has a maximum capacity' do
     expect(subject.capacity).to eq(Van::CAPACITY)
   end
 

@@ -25,6 +25,7 @@ class DockingStation
   end
 
   def release_broken_bikes
+    raise 'No broken bikes to collect!' if !any_broken?
     for i in 0...@bikes.length do
       return @bikes.shift if @bikes[i].broken?
     end
@@ -38,5 +39,9 @@ class DockingStation
 
   def empty?
     @bikes.empty?
+  end
+
+  def any_broken?
+    @bikes.any? { |bike| bike.broken? }
   end
 end

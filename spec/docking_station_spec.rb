@@ -52,5 +52,9 @@ describe DockingStation do
       expect(subject.release_broken_bikes).to eq(bike)
     end
 
+    it 'raises an error if no bikes are broken' do
+      message = "No broken bikes to collect!"
+      expect{subject.release_broken_bikes}.to raise_error(message)
+    end
   end
 end
