@@ -5,6 +5,34 @@ Makers Academy Week 1 Challenge
 
 A program that will run all the Docking Stations, simulate all the Bikes, and emulate all the infrastructure (vans, repair staff, and so on) required to run Boris Bikes.
 
+How to download and use:
+```
+$ git clone https://github.com/vickymg/boris_bikes.git
+$ cd boris_bikes
+```
+An example of commands to run the program in irb:
+```
+> require './lib/docking_station'
+> station = DockingStation.new
+> bike = Bike.new
+> van = Van.new
+> garage = Garage.new
+> station.dock(bike)
+> station.release_bike
+> bike.report_broken
+> station.dock(bike)
+> van.load(station)
+> garage.receive(van)
+> van.collect(garage)
+> station.receive_working_bikes(van)
+
+```
+To run tests:
+```
+$ gem install rspec
+$ rspec
+```
+
 User stories:
 
 ```
